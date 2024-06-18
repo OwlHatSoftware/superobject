@@ -2,6 +2,11 @@ unit supertimezone;
 
 interface
 
+{$IFDEF FPC}
+{$MODE DELPHI}
+//{$MODE OBJFPC}{$H+}
+{$ENDIF}
+
 uses
   Windows, Registry, SysUtils, Math, Generics.Collections,
   supertypes;
@@ -81,38 +86,41 @@ type
 { Windows 2000+ }
 function _SystemTimeToTzSpecificLocalTime(
   lpTimeZoneInformation: PTimeZoneInformation;
-  var lpUniversalTime, lpLocalTime: TSystemTime): BOOL; stdcall; external kernel32 name 'SystemTimeToTzSpecificLocalTime' delayed;
+  var lpUniversalTime, lpLocalTime: TSystemTime): BOOL; stdcall; external kernel32 name 'SystemTimeToTzSpecificLocalTime' {$IFNDEF FPC} delayed {$ENDIF};
 
 { Windows XP+ }
 function _TzSpecificLocalTimeToSystemTime(
   lpTimeZoneInformation: PTimeZoneInformation;
-  var lpLocalTime, lpUniversalTime: TSystemTime): BOOL; stdcall; external kernel32 name 'TzSpecificLocalTimeToSystemTime' delayed;
+  var lpLocalTime, lpUniversalTime: TSystemTime): BOOL; stdcall; external kernel32 name 'TzSpecificLocalTimeToSystemTime' {$IFNDEF FPC} delayed {$ENDIF};
 
 (* EXtended version - DST Aware *)
 
+{$IFNDEF FPC}
 { Windows 7+ }
 function _TzSpecificLocalTimeToSystemTimeEx(
   const lpTimeZoneInformation: PDynamicTimeZoneInformation;
-  const lpLocalTime: PSystemTime; var lpUniversalTime: TSystemTime): BOOL; stdcall; external kernel32 name 'TzSpecificLocalTimeToSystemTimeEx' delayed;
+  const lpLocalTime: PSystemTime; var lpUniversalTime: TSystemTime): BOOL; stdcall; external kernel32 name 'TzSpecificLocalTimeToSystemTimeEx' {$IFNDEF FPC} delayed {$ENDIF};
 
 { Windows 7+ }
 function _SystemTimeToTzSpecificLocalTimeEx(
   const lpTimeZoneInformation: PDynamicTimeZoneInformation;
-   const lpUniversalTime: PSystemTime; var lpLocalTime: TSystemTime): BOOL; stdcall; external kernel32 name 'SystemTimeToTzSpecificLocalTimeEx' delayed;
+   const lpUniversalTime: PSystemTime; var lpLocalTime: TSystemTime): BOOL; stdcall; external kernel32 name 'SystemTimeToTzSpecificLocalTimeEx' {$IFNDEF FPC} delayed {$ENDIF};
+{$ENDIF}
 
 { Convert Local <=> UTC for specific time-zones using the Windows API only. NOT Guaranteed to work }
-   
+{$IFNDEF FPC}
 function _ConvertLocalDateTimeToUTC(const TimeZoneName: SOString;
   const Local: TDateTime; var UTC: TDateTime): Boolean;
 
 function _ConvertUTCDateTimeToLocal(const TimeZoneName: SOString;
   const UTC: TDateTime; var Local: TDateTime): Boolean;
+{$ENDIF}
 
   {$WARN SYMBOL_PLATFORM ON}
 {$ENDIF}
 
 implementation
-
+{$IFNDEF FPC}
 {$IFDEF MSWINDOWS}
 
 { Convert Local -> UTC for specific time-zones using the Windows API only. NOT Guaranteed to work }
@@ -184,6 +192,7 @@ begin
   else
     Result := False;
 end;
+{$ENDIF}
 {$ENDIF}
 
 { TSuperDate }

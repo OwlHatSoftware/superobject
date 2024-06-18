@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="5">
     <PathDelim Value="\"/>
     <Name Value="pkg_jsonsuperobject"/>
     <Type Value="RunAndDesignTime"/>
@@ -8,20 +8,21 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <OtherUnitFiles Value="."/>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <OtherUnitFiles Value=".;..\..\src"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Files Count="2">
       <Item1>
-        <Filename Value="superobject.pas"/>
+        <Filename Value="..\..\src\superobject.pas"/>
         <UnitName Value="superobject"/>
       </Item1>
       <Item2>
-        <Filename Value="superxmlparser.pas"/>
+        <Filename Value="..\..\src\superxmlparser.pas"/>
         <UnitName Value="superxmlparser"/>
       </Item2>
     </Files>
+    <CompatibilityMode Value="True"/>
     <RequiredPkgs Count="1">
       <Item1>
         <PackageName Value="FCL"/>

@@ -4,10 +4,12 @@
 
 unit pkg_jsonsuperobject;
 
+{$warn 5023 off : no warning about unused units}
 interface
 
 uses
-  superobject, superxmlparser, LazarusPackageIntf;
+  superobject, superxmlparser, superdate, supertimezone, supertypes, 
+  LazarusPackageIntf;
 
 implementation
 

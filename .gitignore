@@ -1,2 +1,8 @@
 *.dcu
 __history
+*.ppu
+*.o
+*.o
+*.bak
+*.ppu
+*.a
